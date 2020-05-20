@@ -41,6 +41,6 @@ namespace XmlDeserializeMergeWithAutoMapper.Extensions
 
         public static IEnumerable<PropertyInfo> GetMergeProperties(this Type type)
             => type.GetProperties()
-                .Where(x => x.CustomAttributes.Any(a => a.AttributeType == typeof(MergeAttribute)));
+                .Where(x => x.CustomAttributes.Any(a => a.AttributeType == typeof(MergeKeyAttribute)));
     }
 }

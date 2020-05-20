@@ -7,7 +7,7 @@ namespace XmlDeserializeMergeWithAutoMapper.XmlNodes.Model
     [AutoMap(typeof(Entity))]
     public class Entity
     {
-        [XmlAttribute, Merge]
+        [XmlAttribute, MergeKey]
         public string Id { get; set; }
 
         [XmlAttribute]

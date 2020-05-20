@@ -2,7 +2,7 @@
 
 namespace XmlDeserializeMergeWithAutoMapper.Attributes
 {
-    public class MergeAttribute : Attribute
+    public class MergeKeyAttribute : Attribute
     {
     }
 }
