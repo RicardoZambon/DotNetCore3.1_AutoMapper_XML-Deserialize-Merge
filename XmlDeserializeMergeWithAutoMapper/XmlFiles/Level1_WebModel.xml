@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application>
+  <EntityTypes>
+    <Entity Id="Entity1" ControllerName="TestC1" />
+    <Entity Id="Entity2" ControllerName="TestC2" />
+    <Entity Id="Entity3" DisplayName="Third web entity" ControllerName="TestC3" />
+    <Entity Id="Entity4" ControllerName="TestC4" />
+  </EntityTypes>
+</Application>

@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application>
+  <EntityTypes>
+    <Entity Id="Entity1" DisplayName="1- Fist entity" />
+    <Entity Id="Entity2" DisplayName="2- Second entity" />
+    <Entity Id="Entity3" />
+    <Entity Id="Entity9" DisplayName="Nineth entity" />
+  </EntityTypes>
+</Application>
