@@ -150,7 +150,7 @@ public class EntityMappingProfile : Profile
 }
 ```
 
-````c#
+```c#
 static void Main(string[] args)
 {
     var model = GetModel<Application>("Level0_Model");
