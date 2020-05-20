@@ -1,4 +1,4 @@
-# XmlDeserializeMergeWithMapper
+# XML deserialization with merge using AutoMapper
 Example of how deserialize a XML file and merge its values with other XML deserialized objects using AutoMapper.
 
 
