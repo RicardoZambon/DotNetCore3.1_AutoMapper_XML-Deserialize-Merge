@@ -25,6 +25,13 @@ namespace XmlDeserializeMergeWithAutoMapper
                 cfg.AddMaps(typeof(Program).Assembly);
 
                 cfg.AddProfile(new EntityMappingProfile(typeof(AppApplication)));
+
+                cfg.ForAllPropertyMaps(
+                    pm => pm.SourceMember.Name == pm.DestinationName,
+                    (pm, ce) =>
+                    {
+                        ce.Condition((source, dest, sMem, destMem) => sMem != null && destMem == null);
+                    });
             });
             var mapper = mapperConfiguration.CreateMapper();
 
@@ -55,7 +62,6 @@ namespace XmlDeserializeMergeWithAutoMapper
 
             public EntityMappingProfile(Type parentModelType)
             {
-
                 var listTypes = parentModelType.GetListTypes().ToArray();
 
                 foreach (var listType in listTypes)
