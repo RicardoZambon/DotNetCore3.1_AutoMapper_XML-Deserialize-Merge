@@ -1,9 +1,8 @@
 ﻿using AutoMapper;
 using System;
 using System.IO;
-using System.Linq;
 using System.Xml.Serialization;
-using XmlDeserializeMergeWithAutoMapper.Extensions;
+using XmlDeserializeMergeWithAutoMapper.AutoMapper;
 using XmlDeserializeMergeWithAutoMapper.Interfaces;
 using XmlDeserializeMergeWithAutoMapper.XmlNodes.AppModel;
 using XmlDeserializeMergeWithAutoMapper.XmlNodes.Model;
@@ -22,6 +21,8 @@ namespace XmlDeserializeMergeWithAutoMapper
 
             var mapperConfiguration = new MapperConfiguration(cfg =>
             {
+                cfg.AddProfile(new ModelMappingProfile<AppApplication>());
+
                 cfg.AddMaps(typeof(Program).Assembly);
 
                 cfg.AddProfile(new EntityMappingProfile(typeof(AppApplication)));
@@ -62,6 +63,7 @@ namespace XmlDeserializeMergeWithAutoMapper
 
             public EntityMappingProfile(Type parentModelType)
             {
+
                 var listTypes = parentModelType.GetListTypes().ToArray();
 
                 foreach (var listType in listTypes)

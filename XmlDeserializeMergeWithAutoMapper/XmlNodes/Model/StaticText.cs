@@ -4,12 +4,12 @@ using XmlDeserializeMergeWithAutoMapper.Interfaces;
 
 namespace XmlDeserializeMergeWithAutoMapper.XmlNodes.Model
 {
-    public class Entity : IXmlNode
+    public class StaticText : IXmlNode
     {
         [XmlAttribute, MergeKey]
-        public string Id { get; set; }
+        public string Key { get; set; }
 
         [XmlAttribute]
-        public string DisplayName { get; set; }
+        public string Value { get; set; }
     }
 }

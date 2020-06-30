@@ -4,4 +4,8 @@
     <Entity Id="Entity5" DisplayName="Fifth entity" ControllerName="TestC5" />
     <Entity Id="Entity6" DisplayName="Sixrh entity" ControllerName="TestC6" />
   </EntityTypes>
+  <StaticTexts>
+    <StaticText Key="Text3" Value="Static text value 3 (app)." />
+    <StaticText Key="Text5" Value="Static text value 5." />
+  </StaticTexts>
 </Application>

@@ -5,9 +5,14 @@ using XmlDeserializeMergeWithAutoMapper.XmlNodes.Model;
 
 namespace XmlDeserializeMergeWithAutoMapper.XmlNodes
 {
-    public abstract class ApplicationBase<T> : IApplication where T : Entity
+    public abstract class ApplicationBase<TEntityType, TStaticText> : IApplication
+        where TEntityType : Entity
+        where TStaticText : StaticText
     {
         [XmlArray, XmlArrayItem(nameof(Entity))]
-        public List<T> EntityTypes { get; set; }
+        public List<TEntityType> EntityTypes { get; set; }
+
+        [XmlArray, XmlArrayItem(nameof(StaticText))]
+        public List<TStaticText> StaticTexts { get; set; }
     }
 }

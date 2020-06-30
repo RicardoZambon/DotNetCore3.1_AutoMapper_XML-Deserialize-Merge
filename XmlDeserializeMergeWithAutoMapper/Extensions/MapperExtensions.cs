@@ -21,7 +21,7 @@ namespace XmlDeserializeMergeWithAutoMapper.Extensions
             mapper.CreateMap<List<TSource>, List<TDestination>>().ConvertUsing(
                 new ListTypeConverter<List<TSource>, List<TDestination>, TSource, TDestination>(
                     (src, dest)
-                        => src.GetType().GetMergeProperties().All(s => s.GetValue(src).Equals(dest.GetType().GetProperty(s.Name).GetValue(dest)))
+                        => src.GetType().GetMergeProperties().All(s => s.GetValue(src) is object sourceValue && sourceValue.Equals(dest.GetType().GetProperty(s.Name).GetValue(dest)))
                 )
             );
         }

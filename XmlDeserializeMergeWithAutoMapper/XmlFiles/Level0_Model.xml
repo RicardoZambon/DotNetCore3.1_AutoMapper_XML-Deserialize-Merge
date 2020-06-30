@@ -6,4 +6,9 @@
     <Entity Id="Entity2" DisplayName="Second entity" />
     <Entity Id="Entity3" DisplayName="Third entity" />
   </EntityTypes>
+  <StaticTexts>
+    <StaticText Key="Text1" Value="Static text value 1." />
+    <StaticText Key="Text2" Value="Static text value 2." />
+    <StaticText Key="Text3" Value="Static text value 3." />
+  </StaticTexts>
 </Application>

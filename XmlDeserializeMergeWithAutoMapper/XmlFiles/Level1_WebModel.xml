@@ -6,4 +6,8 @@
     <Entity Id="Entity3" DisplayName="Third web entity" ControllerName="TestC3" />
     <Entity Id="Entity4" ControllerName="TestC4" />
   </EntityTypes>
+  <StaticTexts>
+    <StaticText Key="Text2" Value="Static text value 2 (web)." />
+    <StaticText Key="Text4" Value="Static text value 4." />
+  </StaticTexts>
 </Application>
