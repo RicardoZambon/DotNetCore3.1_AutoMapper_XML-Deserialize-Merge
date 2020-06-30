@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using XmlDeserializeMergeWithAutoMapper.Attributes;
@@ -27,7 +26,7 @@ namespace XmlDeserializeMergeWithAutoMapper.AutoMapper
             MapType(modelNodeType);
 
             //Search for all properties, if any of them is a node of the model
-            var properties = modelNodeType.GetProperties().Where(p => typeof(IXmlNode).IsAssignableFrom(p.PropertyType) || typeof(IEnumerable).IsAssignableFrom(p.PropertyType));
+            var properties = modelNodeType.GetProperties().Where(p => typeof(IXmlNode).IsAssignableFrom(p.PropertyType) || (typeof(IEnumerable).IsAssignableFrom(p.PropertyType) && p.PropertyType.GenericTypeArguments.Any()));
             foreach (var property in properties)
             {
                 MapModels(property.PropertyType);
@@ -63,38 +62,38 @@ namespace XmlDeserializeMergeWithAutoMapper.AutoMapper
 
         private void CreateModelMap(Type sourceType, Type destinationType, bool isList)
         {
-            GetType()
-                .GetMethod(nameof(CreateModelMapDynamic))
-                .MakeGenericMethod(new Type[] { sourceType, destinationType })
-                .Invoke(this, new object[] { isList });
+            //GetType()
+            //    .GetMethod(nameof(CreateModelMapDynamic))
+            //    .MakeGenericMethod(new Type[] { sourceType, destinationType })
+            //    .Invoke(this, new object[] { isList });
 
-            //CreateMap(sourceType, destinationType, MemberList.Source)
-            //    .ForAllMembers(o =>
-
-            //        o.Condition((source, destination, sourceMember, destinationMember) => destinationMember == null && sourceMember != null)
-
-            //    );
-
-            //if (isList)
-            //{
-            //    this.MapLists(sourceType, destinationType);
-            //}
-        }
-
-        public void CreateModelMapDynamic<TSource, TDestination>(bool isList)
-            where TSource : class
-            where TDestination : class
-        {
-            CreateMap<TSource, TDestination>();
-            //    .ForAllMembers(o => {
-            //        o.Condition((source, destination, sourceMember, destMember)
-            //            => sourceMember != null && destMember == null);
-            //    }); ;
+            CreateMap(sourceType, destinationType, MemberList.Source)
+                .ForAllMembers(o =>
+                    o.Condition((source, destination, sourceMember, destinationMember) => sourceMember != null && destinationMember == null)
+                );
 
             if (isList)
             {
-                this.MapGenericLists<TSource, TDestination>();
+                this.MapLists(sourceType, destinationType);
             }
         }
+
+        //public void CreateModelMapDynamic<TSource, TDestination>(bool isList)
+        //    where TSource : class
+        //    where TDestination : class
+        //{
+        //    CreateMap<TSource, TDestination>()
+        //        .ForAllMembers(o =>
+        //         {
+        //             o.Condition((source, destination, sourceMember, destMember)
+        //                 => { Console.WriteLine($"source: {source}, destination: {destination}, sourceMember: {sourceMember}, destMember: {destMember}.");
+        //                     return sourceMember != null && destMember == null; });
+        //         });
+
+        //    if (isList)
+        //    {
+        //        this.MapGenericLists<TSource, TDestination>();
+        //    }
+        //}
     }
 }

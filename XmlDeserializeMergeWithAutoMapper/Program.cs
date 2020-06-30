@@ -22,17 +22,6 @@ namespace XmlDeserializeMergeWithAutoMapper
             var mapperConfiguration = new MapperConfiguration(cfg =>
             {
                 cfg.AddProfile(new ModelMappingProfile<AppApplication>());
-
-                cfg.AddMaps(typeof(Program).Assembly);
-
-                cfg.AddProfile(new EntityMappingProfile(typeof(AppApplication)));
-
-                cfg.ForAllPropertyMaps(
-                    pm => pm.SourceMember.Name == pm.DestinationName,
-                    (pm, ce) =>
-                    {
-                        ce.Condition((source, dest, sMem, destMem) => sMem != null && destMem == null);
-                    });
             });
             var mapper = mapperConfiguration.CreateMapper();
 
@@ -51,35 +40,6 @@ namespace XmlDeserializeMergeWithAutoMapper
             using (var streamReader = new StreamReader(@$"XmlFiles\{modelFileName}.xml"))
             {
                 return (TApplication)xmlSerializer.Deserialize(streamReader);
-            }
-        }
-
-        public class EntityMappingProfile : Profile
-        {
-            public EntityMappingProfile()
-            {
-
-            }
-
-            public EntityMappingProfile(Type parentModelType)
-            {
-
-                var listTypes = parentModelType.GetListTypes().ToArray();
-
-                foreach (var listType in listTypes)
-                {
-                    for (var i = 0; i < listType.Value.Length; i++)
-                    {
-                        var destinationType = listType.Value[i];
-                        this.MapLists(destinationType, destinationType);
-
-                        if (i < listType.Value.Length - 1)
-                        {
-                            var sourceType = listType.Value[i + 1];
-                            this.MapLists(sourceType, destinationType);
-                        }
-                    }
-                }
             }
         }
     }
